@@ -1,7 +1,7 @@
 //CUSTOM JAVASCRIPT
 line = 0, total = 2;//CURRENT LINE AND TOTAL LINE
 sentence = ["This Is A Sample text", "It is Working","Your Mess Your Site"]
-type_anim = (txt) => {
+function type_anim(txt){
     if(line===total){
         line=0;
     }
