@@ -1,23 +1,26 @@
 input[type=text], input[type=password],input[type=email]{
     width: 50%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
+    padding: 8px;
+    margin: 2px 0 0.05vw 0;
     display: inline-block;
     border: none;
     background: #f1f1f1;
-    margin-bottom: 0.05vw;
+  }
+  #input-text{
+      font-size: 1.7vw;
+      margin-bottom: 0px;
   }
   .register{
-      width: 75%;
-      margin:auto;
+      width: 50%;
+      margin:auto; 
+      height: 50%;
+      padding: 0,25%,0,25%;
   }
   input[type=text]:focus, input[type=password]:focus {
     background-color: #ddd;
     outline: none;
   }
-  .form-group{
-      font-size: 1.8vw;
-  }
+
   .register-btn {
     background-color: rgb(34, 27, 121);
     color: white;
