@@ -4,16 +4,16 @@
 {% endblock%}
 {% block body %}
 <div class="register">
-    <h1>Login</h1>
+    <h1><u>Login</u></h1>
 
     <form action="" method="POST">
         <div class="login-name">
-            <label id="input-text">{{form.username.label}}</label>
+            <label id="input-text">{{form.username.label}}</label><br>
             {{form.username()}}
         </div>
 
         <div>
-            <label id="input-text">{{form.password.label}}</label>
+            <label id="input-text">{{form.password.label}}</label><br>
             {{form.password()}}
         </div>
         <button type="submit" class="register-btn">LOGIN</button>

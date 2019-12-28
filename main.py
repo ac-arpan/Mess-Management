@@ -120,12 +120,12 @@ def login():
 
             else:
                 error = "Invalid login credential"
-                return render_template('login.html', error=error)
+                return render_template('login.html', error=error,form=form)
 
             cur.close()
         else:
             error = "Username not found"
-            return render_template('login.html', error=error)
+            return render_template('login.html', error=error,form=form)
 
     return render_template('login.html',form=form)
 
