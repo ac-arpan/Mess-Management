@@ -1,46 +1,56 @@
-input[type=text], input[type=password],input[type=email]{
-    width: 50%;
-    padding: 8px;
-    margin: 2px 0 0.05vw 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
+input[type=text], input[type=password], input[type=email] {
+  width: 50%;
+  padding: 8px;
+  margin: 2px 0 1vw 0;
+  display: inline-block;
+  border: none;
+  background: rgba(221, 221, 221, 0.877);
+}
+@media screen and (min-width: 650px){
+  #input-text {
+    font-size: 2.7vw;
+    margin-bottom: 0px;
   }
-  #input-text{
-      font-size: 1.7vw;
-      margin-bottom: 0px;
+}
+@media screen and (min-width: 800px) {
+  #input-text {
+    font-size: 1.9vw;
+    margin-bottom: 0px;
   }
-  .register{
-      width: 50%;
-      margin:auto; 
-      height: 50%;
-      padding: 0,25%,0,25%;
-  }
-  input[type=text]:focus, input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
-  }
+}
 
-  .register-btn {
-    background-color: rgb(34, 27, 121);
-    color: white;
-    padding: 16px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 50%;
-    opacity: 0.7;
-    border-radius: 10%;
-  }
+.register {
+  width: 50%;
+  margin: auto;
+  height: 50%;
+  padding: 0, 25%, 0, 25%;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.register-btn {
+  background-color: rgb(34, 27, 121);
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.7;
+  border-radius: 10%;
+}
+
 .register-btn:hover {
-    opacity:1;
-  }
-  .login-name{
-      margin-bottom: 3%;
-  }
-  .login-pass{
-      margin-right: 0.05%;
-  }
-  #pass-field{
-      margin-right:5%;
-  }
+  opacity: 1;
+}
+
+.login-name {
+  margin-bottom: 3%;
+}
+
+.login-pass {
+  margin-right: 0.05%;
+}
