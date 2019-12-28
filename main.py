@@ -56,7 +56,9 @@ class RegisterForm(Form):
 @app.route('/register',methods=["GET","POST"])
 def register():
     form = RegisterForm(request.form)  # instance of the registration form(used in register.html)
-    if request.method == 'POST' and form.validate():
+    if 'logged_in' in session:
+        flash("You Are Already Logged In Please Logout to Register Again")  
+    elif request.method == 'POST' and form.validate():
         name = form.name.data
         email = form.email.data
         username = form.username.data
@@ -77,8 +79,7 @@ def register():
         cur.close()
         
         flash('You are now registered and can login', 'success')
-        return redirect(url_for('index'))
-        
+        return redirect(url_for('index')) 
     return render_template('register.html',form=form)
 
 

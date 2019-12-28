@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block title%}
     <title>Home</title>
+    {% endblock%}
     <link rel="stylesheet" href={{url_for('static',filename='base_layout.css')}}>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <!-- CUSTOM CSS -->
     {% block css%}
 
@@ -15,18 +17,17 @@
     
 </head>
 <body>
-    <div class="nav">
+    <div class="navigator">
         <ul class="element">
-            <li class="item h3" id="home"><a href=>Home</a> </li>
-            <li class="item h3" id="attend"><a href=""> Attendance</a></li>
+            <li class="item f3"><a href="/"> <span id="Home">Home</span></a> </li>
+            <li class="item f3" ><a href=""> <span id="Attendance"></span>Attendance</a></li>
             {% if session.logged_in %}
-            <li class="item h3" id="profile"><a href="#"> Profile</a></li>
-            <li class="item h3" id="logout"><a href="/logout"> Logout</a></li>
+            <li class="item f3" ><a href="#"> <span id="Profile">Profile</span> </a></li>
+            <li class="item f3" ><a href="/logout"><span id="Logout">Logout</span> </a></li>
             {% else %}
-            <li class="item h3" id="login"><a href="/login"> Login </a></li>
-            <li class="item h3" id="regist"><a href="/register"> Register</a> </li>
+            <li class="item f3" ><a href="/login"> <span id="Login">Login</span> </a></li>
+            <li class="item f3" ><a href="/register"> <span id="Register">Register</span></a> </li>
             {% endif %}
-           
         </ul>
     </div>
     <div class="container mt-4">
@@ -36,5 +37,6 @@
     </div>
     {% block js %}
     {% endblock %}
+    <script src={{url_for("static",filename="layout.js")}}></script>
 </body>
 </html>

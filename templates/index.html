@@ -1,4 +1,7 @@
 {% extends 'layout.html' %}
+{% block title%}
+<title>Home</title>
+{% endblock%}
 {% block css%}
 <link rel="stylesheet" href={{url_for('static',filename="index.css")}}>
 {% endblock %}
@@ -10,5 +13,5 @@
 {% endblock %}
 
 {% block js%}
-	<script src={{url_for("static",filename="index.js")}}></script>
+	
 {% endblock %}

@@ -1,6 +1,9 @@
 {% extends 'layout.html' %}
-
+{% block title%}
+<title>Register</title>
+{% endblock%}
 {% block body %}
+ <div class="register">
    <h1>Register</h1>
    {% from "include/_formhelper.html" import render_field %}
    <form method="POST" action="">
@@ -24,6 +27,10 @@
             {{render_field(form.confirm,class_='form-control')}}
         </div>
 
-        <p><input type="submit" class="btn btn-primary" value="Submit"></p>
+        <p><input type="submit" class="register-btn" value="REGISTER"></p>
    </form>
+ </div>
 {% endblock %}
+{%block css%}
+<link rel="stylesheet" href={{url_for("static",filename="reg.css")}}>
+{%endblock%}
