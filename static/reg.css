@@ -35,3 +35,12 @@ input[type=text], input[type=password],input[type=email]{
 .register-btn:hover {
     opacity:1;
   }
+  .login-name{
+      margin-bottom: 3%;
+  }
+  .login-pass{
+      margin-right: 0.05%;
+  }
+  #pass-field{
+      margin-right:5%;
+  }
