@@ -15,4 +15,8 @@ def index():
         l.append(i)
     return render_template('index.html',dates=l)
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 app.run(debug=True)
