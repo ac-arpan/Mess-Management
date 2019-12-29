@@ -2,21 +2,21 @@
   {% if messages %}
 
     {% for category, message in messages %}
-      <div class="alert alert-{{ category }}">{{ message }}</div>
+      <div class="flash{{category}}">{{ message }}</div>
     {% endfor %}
     
   {% endif %}
 {% endwith %}
 
 {% if error %}
-  <div class="alert alert-danger">
+  <div class="error">
     {{error}}
   </div>
 {% endif %}
 
 
 {% if msg %}
-  <div class="alert alert-success">
+  <div class="msg">
     {{msg}}
   </div>
 {% endif %}

@@ -1,0 +1,42 @@
+.error{
+    background-color: rgb(209, 81, 81);
+    color: black;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 10px;
+    height: 30px;
+    letter-spacing: 2px;
+
+}
+
+.flashsuccess{
+    background-color: rgb(59, 212, 21);
+    color: black;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 10px;
+    height: 30px;
+    letter-spacing: 1px;
+
+}
+.flashdanger{
+    background-color: rgb(255, 1, 1);
+    color: black;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 10px;
+    height: 30px;
+    letter-spacing: 1px;
+
+}
+
+.msg{
+    background-color: rgb(236, 214, 13);
+    color: black;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 10px;
+    height: 30px;
+    letter-spacing: 1px;
+
+}

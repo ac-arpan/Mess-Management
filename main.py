@@ -68,7 +68,7 @@ def register():
     # instance of the registration form(used in register.html)
     form = RegisterForm(request.form)
     if 'logged_in' in session:
-        flash("You Are Already Logged In Please Logout to Register Again")
+        flash("You Are Already Logged In Please Logout to Register Again","danger")
     elif request.method == 'POST' and form.validate():
         name = form.name.data
         email = form.email.data
