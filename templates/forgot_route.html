@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1>Reset Password</h1>
+    
+    <form action="" method="POST">
+        <div class="register">
+            <label id="input-text">Enter the email-id associated to your account</label>
+            <input type="email" name="email" required value={{request.form.email}}>
+        </div>
+
+        <button type="submit" class="register-btn">RESET</button>
+    </form>
+
+{% endblock %}
+{%block css%}
+<link rel="stylesheet" href={{url_for("static",filename="reg.css")}}>
+{%endblock%}

@@ -4,11 +4,21 @@ import os
 from werkzeug import secure_filename
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
+from flask_mail import Mail,Message
 from passlib.hash import sha256_crypt
 from functools import wraps
 
 app = Flask(__name__)
 app.secret_key = 'super-secret-key'
+
+app.config.update(
+        MAIL_SERVER = 'smtp.gmail.com',
+        MAIL_PORT = '465',
+        MAIL_USE_SSL = True,
+        MAIL_USERNAME ="your@gmail.com",
+        MAIL_PASSWORD = "type-your-password",
+        )
+mail = Mail(app)
 
 
 # config MySQL
@@ -136,6 +146,77 @@ def logout():
     session.clear()
     flash('You are now logged out', 'success')
     return redirect(url_for('login'))
+
+
+
+@app.route('/forgot_route/',methods = ["GET","POST"])
+def forgot_route():
+
+    if request.method == "POST":
+        email = request.form['email']
+
+        cur = mysql.connection.cursor()
+            
+        result = cur.execute("SELECT * FROM users WHERE email = %s",[email])
+
+        if result > 0:
+
+            res = cur.fetchone()
+            username = res['username']
+            password =  res['password']
+
+            msg = Message("Forgot Password - LeArN",
+                        sender = "your@gmail.com",
+                        recipients = [email])
+
+            link = "http://127.0.0.1:5000/reset_password/" + password
+            msg.body = 'Hello ' + username + ',\nYou or someone else has requested to reset password for your account.If it was you click the link : ' + link
+            mail.send(msg)
+
+            flash("A password-reset mail has been sent! Please click on the link given in the mail!",'success')
+        else:
+            error = "Email-id is not registered"
+            return render_template('forgot_route.html',error=error)
+
+       
+
+    return render_template('forgot_route.html')
+
+
+
+
+class ResetPasswordForm(Form):
+    password = PasswordField('New Password',[
+            validators.DataRequired(),
+            validators.EqualTo('confirm',message='Password do not match')
+            ])
+    confirm = PasswordField('Re-enter new password')  
+
+@app.route('/reset_password/<path:password>/',methods = ["GET","POST"])
+def reset_password(password):
+    
+    form = ResetPasswordForm(request.form)
+
+    cur = mysql.connection.cursor()
+            
+    result = cur.execute("SELECT * FROM users WHERE password = %s",[password])
+
+    username = cur.fetchone()['username']
+
+    cur.close()
+
+
+    if request.method == "POST":
+        password = sha256_crypt.encrypt(str(form.password.data))
+        cur = mysql.connection.cursor()
+        cur.execute("UPDATE users SET password=%s WHERE username=%s",(password,username))
+        mysql.connection.commit()
+        cur.close()
+        flash("Your password is changed and updated. Please login!",'success')
+        return redirect(url_for('login'))
+
+
+    return render_template("reset_password.html",username=username,form=form)
 
 
 if __name__ == '__main__':
