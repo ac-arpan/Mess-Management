@@ -156,7 +156,7 @@
   </nav>
   <div class="card">
     <div class="card-header">
-      Today: 28 Dec 2019 Sat
+      <strong><p id="date"></p></strong>
     </div>
     <div class="card-body">
       <h5 class="card-title">Veg: 3 Non-veg: 12</h5>
@@ -245,6 +245,15 @@
 
     </tbody>
   </table>
+
+  
+  <script>
+    var n = new Date();
+    y = n.getFullYear();
+    m = n.getMonth() + 1;
+    d = n.getDate();
+    document.getElementById("date").innerHTML = "Today : " + d + '/' + m + '/' + y;
+  </script>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
