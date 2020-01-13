@@ -28,8 +28,11 @@
         
         {% if session.logged_in %}
         <li class="nav-item active">
-          <a class="nav-link">Logout</a>
-      </li>
+          <a class="nav-link" href='/logout'>Logout</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href='#'>Profile</a>
+        </li>
         {% else %}
         <li class="nav-item active">
           <!-- <a class="nav-link" href="#">Login</a> -->
@@ -37,13 +40,14 @@
             Log In<span class="sr-only">(current)</span>
           </button>
         </li>
-        {% endif %}
         <li class="nav-item active">
           <!-- <a class="nav-link" href="#">Login</a> -->
           <button type="button" class="btn nav-link" data-toggle="modal" data-target="#signup">
             Sign Up<span class="sr-only">(current)</span>
           </button>
         </li>
+        {% endif %}
+        
         <!-- Modal -->
         <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
           aria-hidden="true">
@@ -56,12 +60,16 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form class="form-signin">
+                <form class="form-signin" method="POST">
                   <!-- <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
                   <!-- <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1> -->
                   <label for="inputName" class="sr-only">Full Name</label>
-                  <input type="email" id="inputEmail" class="form-control my-2" placeholder="Full Name" name="name" required autofocus>
+                  <input type="text" id="inputEmail" class="form-control my-2" placeholder="Full Name" name="name" required autofocus>
                   
+                  
+                  <label for="inputUserName" class="sr-only">Username</label>
+                  <input type="text" id="inputEmail" class="form-control my-2" placeholder="Usename" name="username" required autofocus>
+
                   <label for="inputEmail" class="sr-only">Confirm Password</label>
                   <input type="email" id="inputEmail" class="form-control my-2" placeholder="Email" name="email" required autofocus>
                   <label for="inputPassword" class="sr-only">Password</label>
@@ -70,7 +78,7 @@
                   <label for="inputPassword2" class="sr-only">Confirm Password</label>
                   <input type="password" id="inputPassword2" class="form-control my-2" placeholder="Confirm Password" name="confirm" required autofocus>
                   
-                  <button class="btn btn-lg btn-primary btn-block my-2" type="submit">Sign Up</button>
+                  <input class="btn btn-lg btn-primary btn-block my-2" type="submit" name = 'btn' value="Register">
                 </form>
               </div>
               <div class="modal-footer">
@@ -91,23 +99,19 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form>
+                <form method="POST">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" name="loginEmail" id="exampleInputEmail1" aria-describedby="emailHelp"
-                      placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                      else.</small>
+                    <label for="exampleInputEmail1">Username</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                      placeholder="Enter Username" name="lUsername" >
+                    
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" name="loginPassword" id="exampleInputPassword1" placeholder="Password">
+                    <input type="password" class="form-control"  id="exampleInputPassword1" placeholder="Password" name="lPassword">
                   </div>
-                  <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  
+                  <input type="submit" class="btn btn-primary" name='btn' value="Login">
                 </form>
               </div>
               <div class="modal-footer">
@@ -161,9 +165,16 @@
       </ul>
     </div>
   </nav>
+
+  <!-- all flash messages,error messages will be shown here -->
+  <div class="container mt-2">
+    {%include "include/_messages.html"%}
+  </div>
+  
+    
   <div class="card">
     <div class="card-header">
-      <strong><p id="date"></p></strong>
+      <strong><p id="date" class="text-center"></p></strong>
     </div>
     <div class="card-body">
       <h5 class="card-title">Veg: 3 Non-veg: 12</h5>
