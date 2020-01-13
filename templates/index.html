@@ -25,12 +25,19 @@
         <li class="nav-item active">
           <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
         </li>
+        
+        {% if session.logged_in %}
+        <li class="nav-item active">
+          <a class="nav-link">Logout</a>
+      </li>
+        {% else %}
         <li class="nav-item active">
           <!-- <a class="nav-link" href="#">Login</a> -->
           <button type="button" class="btn nav-link" data-toggle="modal" data-target="#login">
             Log In<span class="sr-only">(current)</span>
           </button>
         </li>
+        {% endif %}
         <li class="nav-item active">
           <!-- <a class="nav-link" href="#">Login</a> -->
           <button type="button" class="btn nav-link" data-toggle="modal" data-target="#signup">
@@ -53,12 +60,15 @@
                   <!-- <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
                   <!-- <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1> -->
                   <label for="inputName" class="sr-only">Full Name</label>
-                  <input type="email" id="inputEmail" class="form-control my-2" placeholder="Full Name" required autofocus>
-                  <label for="inputPassword" class="sr-only">Password</label>
+                  <input type="email" id="inputEmail" class="form-control my-2" placeholder="Full Name" name="name" required autofocus>
                   
-                  <input type="password" id="inputPassword" class="form-control my-2" placeholder="Password" required>
-                  <label for="inputPassword" class="sr-only">Confirm Password</label>
-                  <input type="email" id="inputEmail" class="form-control my-2" placeholder="Confirm Password" required autofocus>
+                  <label for="inputEmail" class="sr-only">Confirm Password</label>
+                  <input type="email" id="inputEmail" class="form-control my-2" placeholder="Email" name="email" required autofocus>
+                  <label for="inputPassword" class="sr-only">Password</label>
+                  <input type="password" id="inputPassword" class="form-control my-2" placeholder="Password" name="password" required>
+                  
+                  <label for="inputPassword2" class="sr-only">Confirm Password</label>
+                  <input type="password" id="inputPassword2" class="form-control my-2" placeholder="Confirm Password" name="confirm" required autofocus>
                   
                   <button class="btn btn-lg btn-primary btn-block my-2" type="submit">Sign Up</button>
                 </form>
@@ -84,14 +94,14 @@
                 <form>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    <input type="email" class="form-control" name="loginEmail" id="exampleInputEmail1" aria-describedby="emailHelp"
                       placeholder="Enter email">
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                       else.</small>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <input type="password" class="form-control" name="loginPassword" id="exampleInputPassword1" placeholder="Password">
                   </div>
                   <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -148,9 +158,6 @@
             </div>
           </div>
         </div>
-        <li class="nav-item">
-          <a class="nav-link">Logout</a>
-      </li>
       </ul>
     </div>
   </nav>
