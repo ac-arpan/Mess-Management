@@ -12,8 +12,8 @@ app.config.update(
         MAIL_SERVER = 'smtp.gmail.com',
         MAIL_PORT = '465',
         MAIL_USE_SSL = True,
-        MAIL_USERNAME ="your@gmail.com",
-        MAIL_PASSWORD = "type-your-password",
+        MAIL_USERNAME ="your-mail-id",
+        MAIL_PASSWORD = "your-password",
         )
 
 mail = Mail(app)
@@ -98,12 +98,57 @@ def index():
         elif  request.form['btn'] == 'Reset Password':
             email = request.form['forgotEmail']
             print(email)
-            flash("A mail has been sent!",'success')
-            return redirect(url_for('index'))
+            cur = mysql.connection.cursor()
+            
+            result = cur.execute("SELECT * FROM users WHERE email = %s",[email])
+
+            if result > 0:
+
+                res = cur.fetchone()
+                username = res['username']
+                password =  res['password']
+
+                msg = Message("Forgot Password - Mess",
+                        sender = "your-id@gmail.com",
+                        recipients = [email])
+
+                link = "http://127.0.0.1:5000/reset_password/" + password
+                msg.body = 'Hello ' + username + ',\nYou or someone else has requested to reset password for your account.If it was you click the link : ' + link
+                mail.send(msg)
+
+                flash("A password-reset mail has been sent! Please click on the link given in the mail!",'success')
+            else:
+                error = "Email-id is not registered"
+                return render_template('index.html',dates=l,error=error)
 
     # user login ends here
 
     return render_template('index.html',dates=l)
+
+
+@app.route('/reset_password/<path:password>',methods = ["GET","POST"])
+def reset_password(password):
+
+    cur = mysql.connection.cursor()
+            
+    cur.execute("SELECT * FROM users WHERE password = %s",[password])
+
+    username = cur.fetchone()['username']
+
+    cur.close()
+
+
+    if request.method == "POST":
+        password = sha256_crypt.encrypt(str(request.form['password']))
+        cur = mysql.connection.cursor()
+        cur.execute("UPDATE users SET password=%s WHERE username=%s",(password,username))
+        mysql.connection.commit()
+        cur.close()
+        flash("Your password is changed and updated. Please login!",'success')
+        return redirect(url_for('index'))
+
+
+    return render_template("reset_password.html",username=username)
 
 @app.route('/logout')
 def logout():
@@ -121,4 +166,5 @@ def profile():
     data = cur.fetchone()
     return render_template('profile.html',data=data)
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
