@@ -95,6 +95,12 @@ def index():
                 error = "Username not found"
                 return render_template('index.html', error=error,dates=l)
 
+        elif  request.form['btn'] == 'Reset Password':
+            email = request.form['forgotEmail']
+            print(email)
+            flash("A mail has been sent!",'success')
+            return redirect(url_for('index'))
+
     # user login ends here
 
     return render_template('index.html',dates=l)
@@ -107,6 +113,12 @@ def logout():
 
 @app.route('/profile')
 def profile():
-    return render_template('profile.html')
+    
+    # create a cursor
+    cur = mysql.connection.cursor()
+    # get user by username
+    cur.execute("SELECT * from users WHERE username = %s", [session['username']])
+    data = cur.fetchone()
+    return render_template('profile.html',data=data)
 
 app.run(debug=True)
